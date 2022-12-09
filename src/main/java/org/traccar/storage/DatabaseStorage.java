@@ -44,6 +44,10 @@ public class DatabaseStorage extends Storage {
     private final ObjectMapper objectMapper;
     private final String databaseType;
 
+    public DataSource getDataSource() {
+        return dataSource;
+    }
+
     @Inject
     public DatabaseStorage(Config config, DataSource dataSource, ObjectMapper objectMapper) {
         this.config = config;

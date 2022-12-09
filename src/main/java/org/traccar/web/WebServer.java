@@ -237,4 +237,8 @@ public class WebServer implements LifecycleObject {
         server.stop();
     }
 
+    public Server getServer() {
+        return server;
+    }
+
 }

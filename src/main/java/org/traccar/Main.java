@@ -33,6 +33,7 @@ import java.lang.management.MemoryMXBean;
 import java.lang.management.OperatingSystemMXBean;
 import java.lang.management.RuntimeMXBean;
 import java.nio.charset.Charset;
+import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -44,8 +45,14 @@ public final class Main {
 
     private static Injector injector;
 
+    private static List<? extends LifecycleObject> services = null;
+
     public static Injector getInjector() {
         return injector;
+    }
+
+    public static List<? extends LifecycleObject> getServices() {
+        return services;
     }
 
     private Main() {
@@ -126,7 +133,7 @@ public final class Main {
                 DeviceUtil.resetStatus(injector.getInstance(Storage.class));
             }
 
-            var services = Stream.of(
+            services = Stream.of(
                     ServerManager.class, WebServer.class, ScheduleManager.class, BroadcastService.class)
                     .map(injector::getInstance)
                     .filter(Objects::nonNull)
